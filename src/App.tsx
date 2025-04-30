@@ -6,12 +6,14 @@ import {
 } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import RootLayout from "./RootLayout";
+import PizzaOrderProject from "./pages/PizzaOrderProject";
 
 export default function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<RootLayout />}>
         <Route index element={<LandingPage />} />
+        <Route path="projects/pizzarella" element={<PizzaOrderProject />} />
       </Route>
     )
   );

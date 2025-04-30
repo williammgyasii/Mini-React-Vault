@@ -1,79 +1,15 @@
 //Creating some functions
-
 import Pizza from "../components/Pizza";
+import "../styles/pizzaOrder.css";
+import { PizzaData } from "../lib/pizzaData";
 
-type PizzaDataType = {
-  name: string;
-  ingredients: string;
-  photoName?: string;
-  price?: number;
-  soldOut?: boolean;
-};
-
-const PizzaData: PizzaDataType[] = [
-  {
-    name: "Focaccia",
-    ingredients: "Bread with italian olive oil and rosemary",
-    price: 6,
-    photoName: "../public/images/alan-hardman-SU1LFoeEUkk-unsplash.jpg",
-    soldOut: false,
-  },
-  {
-    name: "Pizza Margherita",
-    ingredients: "Tomato and mozarella",
-    price: 10,
-    photoName: "../public/images/ivan-torres-MQUqbmszGGM-unsplash.jpg",
-    soldOut: false,
-  },
-  {
-    name: "Pizza Spinaci",
-    ingredients: "Tomato, mozarella, spinach, and ricotta cheese",
-    price: 12,
-    photoName: "../public/images/sahal-hameed-Nq9KlQTTEbQ-unsplash.jpg",
-    soldOut: false,
-  },
-  {
-    name: "Pizza Funghi",
-    ingredients: "Tomato, mozarella, mushrooms, and onion",
-    price: 12,
-    photoName: "../public/images/shourav-sheikh-a66sGfOnnqQ-unsplash.jpg",
-    soldOut: false,
-  },
-  {
-    name: "Pizza Salamino",
-    ingredients: "Tomato, mozarella, and pepperoni",
-    price: 15,
-    photoName: "../public/images/nik-owens-40OJLYVWeeM-unsplash.jpg",
-    soldOut: true,
-  },
-  {
-    name: "Pizza Prosciutto",
-    ingredients: "Tomato, mozarella, ham, aragula, and burrata cheese",
-    price: 18,
-    photoName: "../public/images/ivan-torres-MQUqbmszGGM-unsplash.jpg",
-    soldOut: false,
-  },
-];
-
-function Footer() {
-  const hour = new Date().getHours();
-  console.log(hour);
-  const openHour = 2;
-  const closeHour = 20;
-  const isOpen = hour >= openHour && hour <= closeHour;
-
+const Header = () => {
   return (
-    <footer className="footer">
-      {isOpen ? (
-        <Order closeHour={closeHour} openHour={openHour} />
-      ) : (
-        <p>
-          We're happy to welcome you between {openHour}:00 and {closeHour}:00.
-        </p>
-      )}
-    </footer>
+    <header className="header">
+      <h1 className="header-title">Barneys Pizza Joint</h1>
+    </header>
   );
-}
+};
 
 function Order({
   closeHour,
@@ -83,12 +19,12 @@ function Order({
   openHour: number;
 }) {
   return (
-    <div className="order">
+    <div className="order py-3">
       <p>
         We're open from {openHour}:00 to {closeHour}:00. Come visit us or order
         online.
       </p>
-      <button className="btn">Order</button>
+      <button className="btn text-2xl rounded-lg ">Order</button>
     </div>
   );
 }
@@ -114,3 +50,33 @@ const Menu = () => {
     </main>
   );
 };
+
+function Footer() {
+  const hour = new Date().getHours();
+  console.log(hour);
+  const openHour = 2;
+  const closeHour = 20;
+  const isOpen = hour >= openHour && hour <= closeHour;
+
+  return (
+    <footer className="footer">
+      {isOpen ? (
+        <Order closeHour={closeHour} openHour={openHour} />
+      ) : (
+        <p>
+          We're happy to welcome you between {openHour}:00 and {closeHour}:00.
+        </p>
+      )}
+    </footer>
+  );
+}
+
+export default function PizzaOrderProject() {
+  return (
+    <div className="container mx-auto">
+      <Header />
+      <Menu />
+      <Footer />
+    </div>
+  );
+}

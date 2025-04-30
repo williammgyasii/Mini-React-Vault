@@ -5,7 +5,7 @@ type Props = {};
 
 const NavBar = (props: Props) => {
   return (
-    <header className="sticky font-sans text-xl px-10 bg-white border-gray-200 shadow-sm">
+    <header className="sticky  text-xl px-10 bg-white border-gray-200 shadow-sm">
       <div className="w-full h-full p-5 flex justify-between items-center">
         <Link
           to="/"
@@ -15,7 +15,7 @@ const NavBar = (props: Props) => {
           <span>Mini Vault</span>
         </Link>
         <nav className="hidden md:flex text-lg font-sans font-semi-bold items-center gap-6">
-          <Link
+          {/* <Link
             to="/"
             className="text-gray-700 hover:text-emerald-600 transition-colors"
           >
@@ -32,10 +32,10 @@ const NavBar = (props: Props) => {
             className="text-gray-700 hover:text-emerald-600 transition-colors"
           >
             About
-          </Link>
+          </Link> */}
           <Link
             to="https://github.com/williammgyasii/Mini-React-Vault"
-            className="text-gray-700 hover:text-emerald-600 transition-colors flex items-center gap-1"
+            className=" bg-teal-600 p-2 rounded-lg text-white hover:text-amber-300 transition-colors flex items-center gap-1"
           >
             <Github className="h-4 w-4" />
             <span>GitHub</span>

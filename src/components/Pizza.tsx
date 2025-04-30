@@ -16,7 +16,7 @@ const Pizza = ({
 }: PizzaProps) => {
   return (
     <div className={`pizza ${soldOut ? "sold-out" : null}`}>
-      <img src={photoName} alt="Pizza" className="pizza-image" />
+      <img src={photoName} alt="Pizza" className="pizza-image object-cover rounded-lg w-12" />
       <div>
         <h3>{name}</h3>
         <p>{ingredients}</p>

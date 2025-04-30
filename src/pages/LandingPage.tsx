@@ -1,6 +1,6 @@
 import { Link, Route, Routes } from "react-router-dom";
 import Image from "react-image";
-import { Github, ExternalLink, Code } from "lucide-react";
+import { Github, ExternalLink, Code, Link2 } from "lucide-react";
 import { projects } from "../lib/projects";
 
 export default function LandingPage() {
@@ -40,20 +40,20 @@ export default function LandingPage() {
                 <Link
                   to={project.link}
                   key={project.id}
-                  className="group bg-white rounded-xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col h-full"
+                  className="group bg-white h-[35rem] rounded-xl overflow-hidden border border-gray-200 shadow-xs hover:shadow-md transition-all duration-300 flex flex-col "
                 >
-                  <div className="relative h-48 overflow-hidden">
+                  <div className="relative h-2/3 overflow-hidden">
                     <img
                       src={project.image || "/placeholder.svg"}
                       alt={project.title}
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                   </div>
-                  <div className="p-6 flex-grow flex flex-col">
-                    <h3 className="text-xl font-semibold mb-2 group-hover:text-emerald-600 transition-colors">
+                  <div className="p-6 flex-grow flex flex-col items-center w-full">
+                    <h3 className="text-xl w-full text-left font-semibold mb-2 group-hover:text-emerald-600 transition-colors">
                       {project.title}
                     </h3>
-                    <p className="text-gray-600 mb-4 flex-grow">
+                    <p className="text-gray-600 mb-4 font-light flex-grow">
                       {project.description}
                     </p>
                     <div className="flex flex-wrap gap-2 mb-4">
@@ -66,9 +66,9 @@ export default function LandingPage() {
                         </span>
                       ))}
                     </div>
-                    <div className="flex items-center text-emerald-600 font-medium">
-                      <span>View Project</span>
-                      <ExternalLink className="ml-1 h-4 w-4" />
+                    <div className="flex p-2 bg-gradient-to-r from-teal-200 to-teal-500 rounded-lg text-center items-center justify-center w-full text-white font-medium">
+                      <span className="block">View Project</span>
+                      <Link2 className="ml-1 h-4 w-4" />
                     </div>
                   </div>
                 </Link>

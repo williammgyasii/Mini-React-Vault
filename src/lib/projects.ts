@@ -9,12 +9,12 @@ type ProjectType = {
 export const projects: ProjectType[] = [
   {
     id: 1,
-    title: "Interactive Calculator",
+    title: "Pizzarella",
     description:
-      "A JavaScript calculator with theme switching and keyboard support",
-    image: "/placeholder.svg?height=200&width=350",
-    tags: ["JavaScript", "CSS", "HTML"],
-    link: "/projects/calculator",
+      "A React-based web app that displays a pizza menu from various local restaurants. It showcases my work with dynamic data rendering, component-based architecture, and clean UI design",
+    image: "../../public/images/alan-hardman-SU1LFoeEUkk-unsplash.jpg",
+    tags: ["JavaScript", "CSS", "HTML", "React"],
+    link: "/projects/pizzarella",
   },
   {
     id: 2,
