@@ -18,12 +18,12 @@ export const projects: ProjectType[] = [
   },
   {
     id: 2,
-    title: "Weather Dashboard",
+    title: "Checklist",
     description:
-      "Real-time weather app with location search and 5-day forecast",
-    image: "/placeholder.svg?height=200&width=350",
-    tags: ["React", "API", "Tailwind"],
-    link: "/projects/weather",
+      " The Travel Checklist A simple and interactive packing checklist app built with React and Tailwind CSS. It helps users organize and track their travel essentials with features like item status toggling, quantity tracking, and dynamic update",
+    image: "../../public/images/marissa-grootes-ck0i9Dnjtj0-unsplash.jpg",
+    tags: ["React", "Redux", "Tailwind"],
+    link: "/projects/checklist",
   },
   // Add the rest of the projects...
 ];

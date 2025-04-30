@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "../travel.css";
+// import "../travel.css";
 
 type Props = {};
 
@@ -119,7 +119,7 @@ const Stats = () => {
   );
 };
 
-const TravelList = () => {
+const CheckList = () => {
   const [checkList, setCheckList] = useState<ItemsProps[]>(initialItems);
   return (
     <div className="app">
@@ -131,4 +131,4 @@ const TravelList = () => {
   );
 };
 
-export default TravelList;
+export default CheckList;

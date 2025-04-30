@@ -46,7 +46,7 @@ export default function LandingPage() {
                     <img
                       src={project.image || "/placeholder.svg"}
                       alt={project.title}
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="object-cover group-hover:scale-105 w-full h-full transition-transform duration-300"
                     />
                   </div>
                   <div className="p-6 flex-grow flex flex-col items-center w-full">

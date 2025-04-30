@@ -7,6 +7,7 @@ import {
 import LandingPage from "./pages/LandingPage";
 import RootLayout from "./RootLayout";
 import PizzaOrderProject from "./pages/PizzaOrderProject";
+import CheckList from "./pages/ChecklistProject";
 
 export default function App() {
   const router = createBrowserRouter(
@@ -14,6 +15,7 @@ export default function App() {
       <Route path="/" element={<RootLayout />}>
         <Route index element={<LandingPage />} />
         <Route path="projects/pizzarella" element={<PizzaOrderProject />} />
+        <Route path="projects/checklist" element={<CheckList />} />
       </Route>
     )
   );
