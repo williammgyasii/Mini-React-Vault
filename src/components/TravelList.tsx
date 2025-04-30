@@ -10,8 +10,9 @@ type ItemsProps = {
 };
 
 const initialItems: ItemsProps[] = [
-  { id: 1, description: "Passports", quantity: 2, packed: false },
+  { id: 1, description: "Passports", quantity: 2, packed: true },
   { id: 2, description: "Socks", quantity: 12, packed: false },
+  { id: 2, description: "Charger", quantity: 40, packed: false },
 ];
 
 const Logo = () => {
@@ -31,15 +32,33 @@ const PackingList = () => {
     <div className="list">
       <ul>
         {initialItems.map((item, index) => {
-          return <li key={index}>{item.description}</li>;
+          return (
+            <Item
+              key={index}
+              packed={item.packed}
+              quantity={item.quantity}
+              description={item.description}
+            />
+          );
         })}
       </ul>
     </div>
   );
 };
 
-const Item = (item: ItemsProps) => {
-  return <li>{item.description}</li>;
+const Item = (props: Partial<ItemsProps>) => {
+  return (
+    <li>
+      <span
+        style={{
+          textDecoration: `${props.packed && "line-through"}`,
+        }}
+      >
+        {props.quantity} {props.description}
+      </span>
+      <button>❌</button>
+    </li>
+  );
 };
 
 const Stats = () => {
