@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "../travel.css";
 
 type Props = {};
@@ -12,7 +13,7 @@ type ItemsProps = {
 const initialItems: ItemsProps[] = [
   { id: 1, description: "Passports", quantity: 2, packed: true },
   { id: 2, description: "Socks", quantity: 12, packed: false },
-  { id: 2, description: "Charger", quantity: 40, packed: false },
+  { id: 3, description: "Charger", quantity: 40, packed: false },
 ];
 
 const Logo = () => {
@@ -20,10 +21,54 @@ const Logo = () => {
 };
 
 const Form = () => {
+  const [checkList, setCheckList] = useState<ItemsProps[]>(initialItems);
+  const [quantity, setQuantity] = useState(1);
+  const [itemDescription, setItemDescription] = useState("");
+
+  const addToCheckList = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    event.preventDefault();
+    if (!itemDescription) return;
+    setCheckList((prev) => [
+      ...prev,
+      {
+        id: Date.now(),
+        description: itemDescription,
+        quantity: quantity,
+        packed: true,
+      },
+    ]);
+
+    setItemDescription("");
+    setQuantity(1);
+  };
   return (
-    <div className="add-form">
+    <form className="add-form">
       <h3>What do you need for your trip? 🥰</h3>
-    </div>
+      <select
+        value={quantity}
+        onChange={(e) => setQuantity(Number(e.target.value))}
+      >
+        {Array.from({ length: 20 }).map((_, index) => {
+          return (
+            <option key={index} value={index + 1}>
+              {index + 1}
+            </option>
+          );
+        })}
+      </select>
+
+      <input
+        onChange={(e) => setItemDescription(e.target.value)}
+        type="text"
+        value={itemDescription}
+        placeholder="Item..."
+      />
+      <button type="submit" onClick={addToCheckList}>
+        Add
+      </button>
+    </form>
   );
 };
 
