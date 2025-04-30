@@ -10,13 +10,10 @@ import {
   Palette,
 } from "lucide-react";
 import { projects } from "../lib/projects";
-import NavBar from "../components/NavBar";
+
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-red-300 flex flex-col bg-gray-50">
-      {/* Header */}
-      
-
+    <>
       <main className="flex-grow">
         {/* Hero Section */}
         <section className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white py-16 md:py-24">
@@ -123,7 +120,6 @@ export default function LandingPage() {
         </section>
       </main>
 
-      {/* Footer */}
       <footer className="bg-gray-800 text-gray-300 py-12">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center">
@@ -142,6 +138,6 @@ export default function LandingPage() {
           </div>
         </div>
       </footer>
-    </div>
+    </>
   );
 }

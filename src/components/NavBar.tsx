@@ -1,12 +1,13 @@
 import { Code, Github } from "lucide-react";
 import { Link } from "react-router-dom";
 
+
 type Props = {};
 
 const NavBar = (props: Props) => {
   return (
-    <header className="relative top-0 z-10 h-10 bg-white border-b border-gray-200 shadow-sm">
-      <div className="w-full mx-auto p-10 flex justify-between items-center">
+    <header className="sticky font-sans text-xl px-10 bg-white border-gray-200 shadow-sm">
+      <div className="w-full h-full p-5 flex justify-between items-center">
         <Link
           to="/"
           className="text-xl font-bold text-gray-800 flex items-center gap-2"

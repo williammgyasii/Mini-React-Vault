@@ -3,7 +3,6 @@ import {
   createRoutesFromElements,
   Route,
   RouterProvider,
-  Routes,
 } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import RootLayout from "./RootLayout";
