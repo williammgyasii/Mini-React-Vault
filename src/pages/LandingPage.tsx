@@ -1,14 +1,6 @@
 import { Link, Route, Routes } from "react-router-dom";
 import Image from "react-image";
-import {
-  Github,
-  ExternalLink,
-  Code,
-  Lightbulb,
-  Layers,
-  PenTool,
-  Palette,
-} from "lucide-react";
+import { Github, ExternalLink, Code } from "lucide-react";
 import { projects } from "../lib/projects";
 
 export default function LandingPage() {
@@ -18,7 +10,7 @@ export default function LandingPage() {
         {/* Hero Section */}
         <section className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white py-16 md:py-24">
           <div className="container mx-auto px-4 flex flex-col items-center text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold">
               Mini Projects Portfolio
             </h1>
             <p className="text-lg md:text-xl max-w-2xl mb-8">
@@ -88,34 +80,26 @@ export default function LandingPage() {
         {/* About Section */}
         <section id="about" className="py-16 bg-white">
           <div className="container mx-auto px-4">
-            <div className="max-w-3xl mx-auto">
-              <h2 className="text-3xl font-bold text-center mb-8">
+            <div className="max-w-4xl mx-auto text-center gap-3 flex flex-col items-center justify-center">
+              <h2 className="text-6xl bg-gradient-to-r bg-clip-text text-transparent from-teal-300 to-blue-300 font-bold text-center mb-4">
                 About This Portfolio
               </h2>
               <div className="prose prose-emerald lg:prose-lg mx-auto">
                 <p>
-                  This portfolio showcases a collection of mini-projects I've
-                  built as part of my coding refresher journey.
+                  Welcome to my portfolio—a curated collection of mini-projects
+                  developed as part of my coding refresher journey. Each project
+                  reflects a specific concept or skill I’ve revisited and built
+                  upon to sharpen my front-end development expertise.
                 </p>
               </div>
+              <Link
+                to="https://github.com"
+                className="inline-flex items-center bg-white text-emerald-600 hover:bg-gray-100 px-6 py-3 rounded-lg font-medium transition-colors shadow-md"
+              >
+                <Github className="mr-2 h-5 w-5" />
+                View on GitHub
+              </Link>
             </div>
-          </div>
-        </section>
-
-        {/* CTA Section */}
-        <section className="py-16 bg-emerald-600 text-white">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl font-bold mb-4">Ready to see the code?</h2>
-            <p className="max-w-2xl mx-auto mb-8 text-emerald-50">
-              Check out the source code for all these projects on GitHub.
-            </p>
-            <Link
-              to="https://github.com"
-              className="inline-flex items-center bg-white text-emerald-600 hover:bg-gray-100 px-6 py-3 rounded-lg font-medium transition-colors shadow-md"
-            >
-              <Github className="mr-2 h-5 w-5" />
-              View on GitHub
-            </Link>
           </div>
         </section>
       </main>
