@@ -20,8 +20,13 @@ const Logo = () => {
   return <h1>✈️Far Away</h1>;
 };
 
-const Form = () => {
-  const [checkList, setCheckList] = useState<ItemsProps[]>(initialItems);
+const Form = ({
+  checkList,
+  setCheckList,
+}: {
+  checkList: ItemsProps[];
+  setCheckList: React.Dispatch<React.SetStateAction<ItemsProps[]>>;
+}) => {
   const [quantity, setQuantity] = useState(1);
   const [itemDescription, setItemDescription] = useState("");
 
@@ -36,7 +41,7 @@ const Form = () => {
         id: Date.now(),
         description: itemDescription,
         quantity: quantity,
-        packed: true,
+        packed: false,
       },
     ]);
 
@@ -72,11 +77,11 @@ const Form = () => {
   );
 };
 
-const PackingList = () => {
+const PackingList = ({ checkList }: { checkList: ItemsProps[] }) => {
   return (
     <div className="list">
       <ul>
-        {initialItems.map((item, index) => {
+        {checkList.map((item, index) => {
           return (
             <Item
               key={index}
@@ -114,12 +119,13 @@ const Stats = () => {
   );
 };
 
-const TravelList = (props: Props) => {
+const TravelList = () => {
+  const [checkList, setCheckList] = useState<ItemsProps[]>(initialItems);
   return (
     <div className="app">
       <Logo />
-      <Form />
-      <PackingList />
+      <Form checkList={checkList} setCheckList={setCheckList} />
+      <PackingList checkList={checkList} />
       <Stats />
     </div>
   );
