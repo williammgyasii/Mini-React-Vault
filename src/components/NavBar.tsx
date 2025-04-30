@@ -13,9 +13,9 @@ const NavBar = (props: Props) => {
           className="text-xl font-bold text-gray-800 flex items-center gap-2"
         >
           <Code className="h-6 w-6 text-emerald-600" />
-          <span>CodeRefresher</span>
+          <span>Mini Vault</span>
         </Link>
-        <nav className="hidden md:flex items-center gap-6">
+        <nav className="hidden md:flex text-lg font-sans font-semi-bold items-center gap-6">
           <Link
             to="/"
             className="text-gray-700 hover:text-emerald-600 transition-colors"
