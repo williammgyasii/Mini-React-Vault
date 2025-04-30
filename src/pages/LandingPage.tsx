@@ -42,14 +42,14 @@ export default function LandingPage() {
                   key={project.id}
                   className="group bg-white h-[35rem] rounded-xl overflow-hidden border border-gray-200 shadow-xs hover:shadow-md transition-all duration-300 flex flex-col "
                 >
-                  <div className="relative h-2/3 overflow-hidden">
+                  <div className="relative overflow-hidden">
                     <img
                       src={project.image || "/placeholder.svg"}
                       alt={project.title}
-                      className="object-cover group-hover:scale-105 w-full h-full transition-transform duration-300"
+                      className="object-cover group-hover:scale-105 w-full h-[30rem] transition-transform duration-300"
                     />
                   </div>
-                  <div className="p-6 flex-grow flex flex-col items-center w-full">
+                  <div className="p-6 flex flex-col items-center w-full">
                     <h3 className="text-xl w-full text-left font-semibold mb-2 group-hover:text-emerald-600 transition-colors">
                       {project.title}
                     </h3>

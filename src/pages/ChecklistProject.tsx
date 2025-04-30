@@ -1,5 +1,5 @@
 import { useState } from "react";
-// import "../travel.css";
+import "../styles/travel.css";
 
 type Props = {};
 
@@ -17,7 +17,7 @@ const initialItems: ItemsProps[] = [
 ];
 
 const Logo = () => {
-  return <h1>✈️Far Away</h1>;
+  return <h1 className="checklist-header">✈️Far Away</h1>;
 };
 
 const Form = ({
