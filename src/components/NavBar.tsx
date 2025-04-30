@@ -1,0 +1,49 @@
+import { Code, Github } from "lucide-react";
+import { Link } from "react-router-dom";
+
+type Props = {};
+
+const NavBar = (props: Props) => {
+  return (
+    <header className="relative top-0 z-10 h-10 bg-white border-b border-gray-200 shadow-sm">
+      <div className="w-full mx-auto p-10 flex justify-between items-center">
+        <Link
+          to="/"
+          className="text-xl font-bold text-gray-800 flex items-center gap-2"
+        >
+          <Code className="h-6 w-6 text-emerald-600" />
+          <span>CodeRefresher</span>
+        </Link>
+        <nav className="hidden md:flex items-center gap-6">
+          <Link
+            to="/"
+            className="text-gray-700 hover:text-emerald-600 transition-colors"
+          >
+            Home
+          </Link>
+          <Link
+            to="#projects"
+            className="text-gray-700 hover:text-emerald-600 transition-colors"
+          >
+            Projects
+          </Link>
+          <Link
+            to="#about"
+            className="text-gray-700 hover:text-emerald-600 transition-colors"
+          >
+            About
+          </Link>
+          <Link
+            to="https://github.com"
+            className="text-gray-700 hover:text-emerald-600 transition-colors flex items-center gap-1"
+          >
+            <Github className="h-4 w-4" />
+            <span>GitHub</span>
+          </Link>
+        </nav>
+      </div>
+    </header>
+  );
+};
+
+export default NavBar;
