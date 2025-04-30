@@ -1,7 +1,6 @@
 import { Code, Github } from "lucide-react";
 import { Link } from "react-router-dom";
 
-
 type Props = {};
 
 const NavBar = (props: Props) => {
@@ -35,7 +34,7 @@ const NavBar = (props: Props) => {
             About
           </Link>
           <Link
-            to="https://github.com"
+            to="https://github.com/williammgyasii/Mini-React-Vault"
             className="text-gray-700 hover:text-emerald-600 transition-colors flex items-center gap-1"
           >
             <Github className="h-4 w-4" />
