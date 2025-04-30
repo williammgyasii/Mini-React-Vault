@@ -1,9 +1,7 @@
 import { Code, Github } from "lucide-react";
 import { Link } from "react-router-dom";
 
-type Props = {};
-
-const NavBar = (props: Props) => {
+const NavBar = () => {
   return (
     <header className="sticky  text-xl px-10 bg-white border-gray-200 shadow-sm">
       <div className="w-full h-full p-5 flex justify-between items-center">

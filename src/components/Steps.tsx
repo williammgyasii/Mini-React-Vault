@@ -1,15 +1,13 @@
 import { useState } from "react";
 import "../steps.css";
 
-type Props = {};
-
 const messages: string[] = [
   "Learn React ⚛️",
   "Apply for jobs 💼",
   "Invest your new income 🤑",
 ];
 
-const Steps = (props: Props) => {
+const Steps = () => {
   const [currentStep, setCurrentStep] = useState(0);
 
   const handleNext = () => {

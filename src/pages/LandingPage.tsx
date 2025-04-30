@@ -1,6 +1,5 @@
-import { Link, Route, Routes } from "react-router-dom";
-import Image from "react-image";
-import { Github, ExternalLink, Code, Link2 } from "lucide-react";
+import { Link,} from "react-router-dom";
+import { Github,  Code, Link2 } from "lucide-react";
 import { projects } from "../lib/projects";
 
 export default function LandingPage() {

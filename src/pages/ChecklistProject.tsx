@@ -1,8 +1,6 @@
 import { useState } from "react";
 import "../styles/travel.css";
 
-type Props = {};
-
 type ItemsProps = {
   id: number;
   description: string;
@@ -21,10 +19,9 @@ const Logo = () => {
 };
 
 const Form = ({
-  checkList,
   setCheckList,
 }: {
-  checkList: ItemsProps[];
+  checkList?: ItemsProps[];
   setCheckList: React.Dispatch<React.SetStateAction<ItemsProps[]>>;
 }) => {
   const [quantity, setQuantity] = useState(1);
