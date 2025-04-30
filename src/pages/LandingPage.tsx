@@ -1,43 +1,51 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
 import Image from "react-image";
-import { Github, ExternalLink, Code, Lightbulb, Layers, PenTool, Palette } from "lucide-react";
-
-export default function ProjectsLanding() {
-  const projects = [
-    {
-      id: 1,
-      title: "Interactive Calculator",
-      description: "A JavaScript calculator with theme switching and keyboard support",
-      image: "/placeholder.svg?height=200&width=350",
-      tags: ["JavaScript", "CSS", "HTML"],
-      link: "/projects/calculator",
-    },
-    {
-      id: 2,
-      title: "Weather Dashboard",
-      description: "Real-time weather app with location search and 5-day forecast",
-      image: "/placeholder.svg?height=200&width=350",
-      tags: ["React", "API", "Tailwind"],
-      link: "/projects/weather",
-    },
-    // Add the rest of the projects...
-  ];
-
+import {
+  Github,
+  ExternalLink,
+  Code,
+  Lightbulb,
+  Layers,
+  PenTool,
+  Palette,
+} from "lucide-react";
+import { projects } from "../lib/projects";
+export default function LandingPage() {
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
+    <div className="min-h-screen bg-red-300 flex flex-col bg-gray-50">
       {/* Header */}
       <header className="sticky top-0 z-10 bg-white border-b border-gray-200 shadow-sm">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <Link to="/" className="text-xl font-bold text-gray-800 flex items-center gap-2">
+          <Link
+            to="/"
+            className="text-xl font-bold text-gray-800 flex items-center gap-2"
+          >
             <Code className="h-6 w-6 text-emerald-600" />
             <span>CodeRefresher</span>
           </Link>
           <nav className="hidden md:flex items-center gap-6">
-            <Link to="/" className="text-gray-700 hover:text-emerald-600 transition-colors">Home</Link>
-            <Link to="#projects" className="text-gray-700 hover:text-emerald-600 transition-colors">Projects</Link>
-            <Link to="#about" className="text-gray-700 hover:text-emerald-600 transition-colors">About</Link>
-            <Link to="https://github.com" className="text-gray-700 hover:text-emerald-600 transition-colors flex items-center gap-1">
+            <Link
+              to="/"
+              className="text-gray-700 hover:text-emerald-600 transition-colors"
+            >
+              Home
+            </Link>
+            <Link
+              to="#projects"
+              className="text-gray-700 hover:text-emerald-600 transition-colors"
+            >
+              Projects
+            </Link>
+            <Link
+              to="#about"
+              className="text-gray-700 hover:text-emerald-600 transition-colors"
+            >
+              About
+            </Link>
+            <Link
+              to="https://github.com"
+              className="text-gray-700 hover:text-emerald-600 transition-colors flex items-center gap-1"
+            >
               <Github className="h-4 w-4" />
               <span>GitHub</span>
             </Link>
@@ -49,9 +57,12 @@ export default function ProjectsLanding() {
         {/* Hero Section */}
         <section className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white py-16 md:py-24">
           <div className="container mx-auto px-4 flex flex-col items-center text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Mini Projects Portfolio</h1>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+              Mini Projects Portfolio
+            </h1>
             <p className="text-lg md:text-xl max-w-2xl mb-8">
-              A collection of interactive web projects built as part of my coding refresher journey.
+              A collection of interactive web projects built as part of my
+              coding refresher journey.
             </p>
             <Link
               to="#projects"
@@ -67,7 +78,8 @@ export default function ProjectsLanding() {
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-4">My Projects</h2>
             <p className="text-gray-600 text-center max-w-2xl mx-auto mb-12">
-              Click on any project card to view the live demo and interact with it.
+              Click on any project card to view the live demo and interact with
+              it.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -78,7 +90,7 @@ export default function ProjectsLanding() {
                   className="group bg-white rounded-xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col h-full"
                 >
                   <div className="relative h-48 overflow-hidden">
-                    <Image
+                    <img
                       src={project.image || "/placeholder.svg"}
                       alt={project.title}
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
@@ -88,10 +100,15 @@ export default function ProjectsLanding() {
                     <h3 className="text-xl font-semibold mb-2 group-hover:text-emerald-600 transition-colors">
                       {project.title}
                     </h3>
-                    <p className="text-gray-600 mb-4 flex-grow">{project.description}</p>
+                    <p className="text-gray-600 mb-4 flex-grow">
+                      {project.description}
+                    </p>
                     <div className="flex flex-wrap gap-2 mb-4">
                       {project.tags.map((tag, index) => (
-                        <span key={index} className="text-xs font-medium bg-gray-100 text-gray-700 px-2 py-1 rounded-full">
+                        <span
+                          key={index}
+                          className="text-xs font-medium bg-gray-100 text-gray-700 px-2 py-1 rounded-full"
+                        >
                           {tag}
                         </span>
                       ))}
@@ -111,11 +128,13 @@ export default function ProjectsLanding() {
         <section id="about" className="py-16 bg-white">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto">
-              <h2 className="text-3xl font-bold text-center mb-8">About This Portfolio</h2>
+              <h2 className="text-3xl font-bold text-center mb-8">
+                About This Portfolio
+              </h2>
               <div className="prose prose-emerald lg:prose-lg mx-auto">
                 <p>
-                  This portfolio showcases a collection of mini-projects I've built as part of my coding refresher
-                  journey.
+                  This portfolio showcases a collection of mini-projects I've
+                  built as part of my coding refresher journey.
                 </p>
               </div>
             </div>
@@ -145,11 +164,16 @@ export default function ProjectsLanding() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-6 md:mb-0">
-              <Link to="/" className="text-xl font-bold text-white flex items-center gap-2">
+              <Link
+                to="/"
+                className="text-xl font-bold text-white flex items-center gap-2"
+              >
                 <Code className="h-6 w-6 text-emerald-400" />
                 <span>CodeRefresher</span>
               </Link>
-              <p className="mt-2 text-sm text-gray-400">A collection of web development mini-projects</p>
+              <p className="mt-2 text-sm text-gray-400">
+                A collection of web development mini-projects
+              </p>
             </div>
           </div>
         </div>
