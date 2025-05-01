@@ -70,13 +70,20 @@ const Form = ({
   );
 };
 
-const PackingList = ({ checkList }: { checkList: ItemsProps[] }) => {
+const PackingList = ({
+  checkList,
+  setCheckList,
+}: {
+  checkList: ItemsProps[];
+  setCheckList: React.Dispatch<React.SetStateAction<ItemsProps[]>>;
+}) => {
   return (
     <div className="list">
       <ul>
         {checkList.map((item, index) => {
           return (
             <Item
+              setCheckList={setCheckList}
               key={index}
               packed={item.packed}
               quantity={item.quantity}
@@ -99,7 +106,7 @@ const Item = (props: Partial<ItemsProps>) => {
       >
         {props.quantity} {props.description}
       </span>
-      <button onClick={()=>console.log("deleete")}>❌</button>
+      <button onClick={filterCheckList}>❌</button>
     </li>
   );
 };
@@ -114,13 +121,15 @@ const Stats = () => {
 
 const CheckList = () => {
   const [checkList, setCheckList] = useState<ItemsProps[]>([]);
-  
-  
+
+  const handleDelete = (id: number) => {
+    setCheckList((prev) => prev.filter((item) => item.id !== id));
+  };
   return (
     <div className="app">
       <Logo />
       <Form checkList={checkList} setCheckList={setCheckList} />
-      <PackingList checkList={checkList} />
+      <PackingList handleDelete={handleDelete} setCheckList={setCheckList} />
       <Stats />
     </div>
   );
