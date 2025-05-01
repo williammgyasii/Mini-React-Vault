@@ -8,12 +8,6 @@ type ItemsProps = {
   packed: boolean;
 };
 
-const initialItems: ItemsProps[] = [
-  { id: 1, description: "Passports", quantity: 2, packed: true },
-  { id: 2, description: "Socks", quantity: 12, packed: false },
-  { id: 3, description: "Charger", quantity: 40, packed: false },
-];
-
 const Logo = () => {
   return <h1 className="checklist-header">✈️Far Away</h1>;
 };
@@ -31,7 +25,9 @@ const Form = ({
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     event.preventDefault();
+
     if (!itemDescription) return;
+
     setCheckList((prev) => [
       ...prev,
       {
@@ -103,7 +99,7 @@ const Item = (props: Partial<ItemsProps>) => {
       >
         {props.quantity} {props.description}
       </span>
-      <button>❌</button>
+      <button onClick={()=>console.log("deleete")}>❌</button>
     </li>
   );
 };
@@ -117,7 +113,9 @@ const Stats = () => {
 };
 
 const CheckList = () => {
-  const [checkList, setCheckList] = useState<ItemsProps[]>(initialItems);
+  const [checkList, setCheckList] = useState<ItemsProps[]>([]);
+  
+  
   return (
     <div className="app">
       <Logo />
