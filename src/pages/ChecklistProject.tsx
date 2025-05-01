@@ -73,9 +73,11 @@ const Form = ({
 const PackingList = ({
   checkList,
   onHandleDelete,
+  onHandleCheck,
 }: {
   checkList: ItemsProps[];
   onHandleDelete: (id: number) => void;
+  onHandleCheck: (id: number) => void;
 }) => {
   return (
     <div className="list">
@@ -89,6 +91,7 @@ const PackingList = ({
               packed={item.packed}
               quantity={item.quantity}
               description={item.description}
+              onToggleChecked={onHandleCheck}
             />
           );
         })}
@@ -97,9 +100,19 @@ const PackingList = ({
   );
 };
 
-const Item = (props: ItemsProps & { onHandleDelete: (id: number) => void }) => {
+const Item = (
+  props: ItemsProps & {
+    onHandleDelete: (id: number) => void;
+    onToggleChecked: (id: number) => void;
+  }
+) => {
   return (
     <li>
+      <input
+        type="checkbox"
+        value={String(props.packed)}
+        onChange={() => props.onToggleChecked(props.id!)}
+      />
       <span
         style={{
           textDecoration: `${props.packed && "line-through"}`,
@@ -126,11 +139,24 @@ const CheckList = () => {
   const handleDelete = (id: number) => {
     setCheckList((prev) => prev.filter((item) => item.id !== id));
   };
+
+  const toggleCheckedItem = (id: number) => {
+    setCheckList((prev) =>
+      prev.map((item) =>
+        item.id === id ? { ...item, packed: !item.packed } : item
+      )
+    );
+  };
+
   return (
     <div className="app">
       <Logo />
       <Form checkList={checkList} setCheckList={setCheckList} />
-      <PackingList checkList={checkList} onHandleDelete={handleDelete} />
+      <PackingList
+        onHandleCheck={toggleCheckedItem}
+        checkList={checkList}
+        onHandleDelete={handleDelete}
+      />
       <Stats />
     </div>
   );
