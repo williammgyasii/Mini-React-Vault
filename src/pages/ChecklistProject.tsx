@@ -72,10 +72,10 @@ const Form = ({
 
 const PackingList = ({
   checkList,
-  setCheckList,
+  onHandleDelete,
 }: {
   checkList: ItemsProps[];
-  setCheckList: React.Dispatch<React.SetStateAction<ItemsProps[]>>;
+  onHandleDelete: (id: number) => void;
 }) => {
   return (
     <div className="list">
@@ -83,7 +83,8 @@ const PackingList = ({
         {checkList.map((item, index) => {
           return (
             <Item
-              setCheckList={setCheckList}
+              onHandleDelete={onHandleDelete}
+              id={item.id}
               key={index}
               packed={item.packed}
               quantity={item.quantity}
@@ -96,7 +97,7 @@ const PackingList = ({
   );
 };
 
-const Item = (props: Partial<ItemsProps>) => {
+const Item = (props: ItemsProps & { onHandleDelete: (id: number) => void }) => {
   return (
     <li>
       <span
@@ -106,7 +107,7 @@ const Item = (props: Partial<ItemsProps>) => {
       >
         {props.quantity} {props.description}
       </span>
-      <button onClick={filterCheckList}>❌</button>
+      <button onClick={() => props.onHandleDelete(props.id!)}>❌</button>
     </li>
   );
 };
@@ -129,7 +130,7 @@ const CheckList = () => {
     <div className="app">
       <Logo />
       <Form checkList={checkList} setCheckList={setCheckList} />
-      <PackingList handleDelete={handleDelete} setCheckList={setCheckList} />
+      <PackingList checkList={checkList} onHandleDelete={handleDelete} />
       <Stats />
     </div>
   );
