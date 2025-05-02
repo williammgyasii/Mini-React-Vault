@@ -126,6 +126,8 @@ const PackingList = ({
           <option value={"description"}>Sort by description</option>
           <option value={"packed"}>Sort by Packed Status</option>
         </select>
+
+        <button onClick={() => console.log("Acr")}>Clear List</button>
       </div>
     </div>
   );
