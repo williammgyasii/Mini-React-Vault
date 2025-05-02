@@ -8,6 +8,10 @@ type ItemsProps = {
   packed: boolean;
 };
 
+type StatsProps = {
+  totalItems: number;
+};
+
 const Logo = () => {
   return <h1 className="checklist-header">✈️Far Away</h1>;
 };
@@ -79,10 +83,27 @@ const PackingList = ({
   onHandleDelete: (id: number) => void;
   onHandleCheck: (id: number) => void;
 }) => {
+  const [sortBy, setSortBy] = useState("input");
+  let sortedItems: ItemsProps[] = [];
+  switch (sortBy) {
+    case "input":
+      sortedItems = checkList;
+      break;
+    case "description":
+      sortedItems = checkList
+        .slice()
+        .sort((a, b) => a.description.localeCompare(b.description));
+      break;
+    case "packed":
+      sortedItems = checkList
+        .slice()
+        .sort((a, b) => Number(a.packed) - Number(b.packed));
+      break;
+  }
   return (
     <div className="list">
       <ul>
-        {checkList.map((item, index) => {
+        {sortedItems.map((item, index) => {
           return (
             <Item
               onHandleDelete={onHandleDelete}
@@ -96,6 +117,16 @@ const PackingList = ({
           );
         })}
       </ul>
+      <div className="actions">
+        <select
+          value={sortBy}
+          onChange={(event) => setSortBy(event.target.value)}
+        >
+          <option value={"input"}>Sort by input order</option>
+          <option value={"description"}>Sort by description</option>
+          <option value={"packed"}>Sort by Packed Status</option>
+        </select>
+      </div>
     </div>
   );
 };
@@ -125,10 +156,15 @@ const Item = (
   );
 };
 
-const Stats = () => {
+const Stats = ({ checkListItems }: { checkListItems: ItemsProps[] }) => {
+  const numPacked = checkListItems.filter((item) => item.packed).length;
+  const numPercentage = (numPacked / checkListItems.length) * 100;
   return (
     <footer className="stats">
-      <em>💼You have X items on your list,and you have packed X (X%)</em>
+      <em>
+        💼You have {checkListItems.length} items on your list,and you have
+        packed {numPacked} ({numPercentage}%)
+      </em>
     </footer>
   );
 };
@@ -157,7 +193,7 @@ const CheckList = () => {
         checkList={checkList}
         onHandleDelete={handleDelete}
       />
-      <Stats />
+      <Stats checkListItems={checkList} />
     </div>
   );
 };
