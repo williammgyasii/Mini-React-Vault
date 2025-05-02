@@ -78,10 +78,12 @@ const PackingList = ({
   checkList,
   onHandleDelete,
   onHandleCheck,
+  onClearAll,
 }: {
   checkList: ItemsProps[];
   onHandleDelete: (id: number) => void;
   onHandleCheck: (id: number) => void;
+  onClearAll: () => void;
 }) => {
   const [sortBy, setSortBy] = useState("input");
   let sortedItems: ItemsProps[] = [];
@@ -127,7 +129,7 @@ const PackingList = ({
           <option value={"packed"}>Sort by Packed Status</option>
         </select>
 
-        <button onClick={() => console.log("Acr")}>Clear List</button>
+        <button onClick={onClearAll}>Clear List</button>
       </div>
     </div>
   );
@@ -186,11 +188,16 @@ const CheckList = () => {
     );
   };
 
+  const clearAll = () => {
+    setCheckList([]);
+  };
+
   return (
     <div className="app">
       <Logo />
       <Form checkList={checkList} setCheckList={setCheckList} />
       <PackingList
+        onClearAll={clearAll}
         onHandleCheck={toggleCheckedItem}
         checkList={checkList}
         onHandleDelete={handleDelete}
