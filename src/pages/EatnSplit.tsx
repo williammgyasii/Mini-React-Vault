@@ -19,7 +19,7 @@ const EatnSplit = () => {
     </div>
   );
 };
- 
+
 const FriendsList = () => {
   return (
     <ul>
@@ -57,7 +57,7 @@ const Button = ({
   handleShowAddFriend,
 }: {
   children: ReactNode;
-  handleShowAddFriend: () => void;
+  handleShowAddFriend?: () => void;
 }) => {
   return (
     <button onClick={handleShowAddFriend} className="button">
@@ -67,13 +67,23 @@ const Button = ({
 };
 
 const FormAddFriend = () => {
+  const [name, setName] = useState("");
+  const [image, setImage] = useState("");
   return (
     <form className="form-add-friend">
       <label>Friend Name</label>
-      <input type="text" />
+      <input
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        type="text"
+      />
 
       <label>Image Url</label>
-      <input type="text" />
+      <input
+        value={image}
+        onChange={(e) => setImage(e.target.value)}
+        type="text"
+      />
 
       <Button>Add</Button>
     </form>
