@@ -8,14 +8,19 @@ import LandingPage from "./pages/LandingPage";
 import RootLayout from "./RootLayout";
 import PizzaOrderProject from "./pages/PizzaOrderProject";
 import CheckList from "./pages/ChecklistProject";
+import { projects } from "./lib/projects";
 
 export default function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<RootLayout />}>
         <Route index element={<LandingPage />} />
-        <Route path="projects/pizzarella" element={<PizzaOrderProject />} />
-        <Route path="projects/checklist" element={<CheckList />} />
+        {projects.map((route, index) => {
+          const RouteComponent = route.component;
+          return (
+            <Route key={index} path={route.link} element={<RouteComponent />} />
+          );
+        })}
       </Route>
     )
   );
