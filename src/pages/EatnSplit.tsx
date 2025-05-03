@@ -1,7 +1,25 @@
 import "../styles/eatnsplit.css";
 import { FriendsProps, initialFriends } from "../lib/EatnSplitFriends";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 
+const EatnSplit = () => {
+  const [showForm, setShowForm] = useState(false);
+  return (
+    <div className="eat-split-body">
+      <div className="eat-app">
+        <div className="sidebar">
+          <FriendsList />
+          {showForm && <FormAddFriend />}
+          <Button handleShowAddFriend={() => setShowForm((prev) => !prev)}>
+            {showForm ? "Close ✖️" : "Add Friend 🧔"}
+          </Button>
+        </div>
+        {/* {showForm && <FormSplitBill />} */}
+      </div>
+    </div>
+  );
+};
+ 
 const FriendsList = () => {
   return (
     <ul>
@@ -34,24 +52,54 @@ const Friend = ({ friend }: FriendsProps) => {
   );
 };
 
-const EatnSplit = () => {
+const Button = ({
+  children,
+  handleShowAddFriend,
+}: {
+  children: ReactNode;
+  handleShowAddFriend: () => void;
+}) => {
   return (
-    <div className="eat-split-body">
-      <div className="eat-app">
-        <div className="sidebar">
-          <FriendsList />
-        </div>
-      </div>
-    </div>
+    <button onClick={handleShowAddFriend} className="button">
+      {children}
+    </button>
   );
 };
 
-const Button = ({ children }: { children: ReactNode }) => {
-  return <button className="button">{children}</button>;
-};
-
 const FormAddFriend = () => {
-  return <div>Add Friend</div>;
+  return (
+    <form className="form-add-friend">
+      <label>Friend Name</label>
+      <input type="text" />
+
+      <label>Image Url</label>
+      <input type="text" />
+
+      <Button>Add</Button>
+    </form>
+  );
 };
 
+const FormSplitBill = () => {
+  return (
+    <form className="form-split-bill">
+      <h2>Split a bill with X</h2>
+
+      <label>Bill Value</label>
+      <input type="text" />
+
+      <label>Your expense</label>
+      <input type="text" />
+
+      <label>X's Value</label>
+      <input type="text" />
+
+      <label>Who is paying the bill</label>
+      <select>
+        <option value={"user"}>You</option>
+        <option value={"friend"}>X</option>
+      </select>
+    </form>
+  );
+};
 export default EatnSplit;
