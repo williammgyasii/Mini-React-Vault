@@ -9,11 +9,16 @@ import { ReactNode, useState } from "react";
 const EatnSplit = () => {
   const [showForm, setShowForm] = useState(false);
   const [friendsList, setFriendsList] = useState<FriendsType[]>(initialFriends);
+  const [selectedFriend, setSelectedFriend] = useState<FriendsType>(null!);
   return (
     <div className="eat-split-body">
       <div className="eat-app">
         <div className="sidebar">
-          <FriendsList friendsList={friendsList} />
+          <FriendsList
+            setSelected={setSelectedFriend}
+            friendsList={friendsList}
+            selectedFriend={selectedFriend}
+          />
           {showForm && (
             <FormAddFriend
               setFriends={(friend) => {
@@ -22,29 +27,52 @@ const EatnSplit = () => {
               }}
             />
           )}
-          <Button handleShowAddFriend={() => setShowForm((prev) => !prev)}>
+          <Button onClick={() => setShowForm((prev) => !prev)}>
             {showForm ? "Close ✖️" : "Add Friend 🧔"}
           </Button>
         </div>
-        {/* {showForm && <FormSplitBill />} */}
+        {selectedFriend && <FormSplitBill selectedFriend={selectedFriend} />}
       </div>
     </div>
   );
 };
 
-const FriendsList = ({ friendsList }: { friendsList: FriendsType[] }) => {
+const FriendsList = ({
+  friendsList,
+  setSelected,
+  selectedFriend,
+}: {
+  selectedFriend: FriendsType;
+  friendsList: FriendsType[];
+  setSelected: React.Dispatch<React.SetStateAction<FriendsType>>;
+}) => {
   return (
     <ul>
       {friendsList.map((friend) => {
-        return <Friend key={friend.id} friend={friend} />;
+        return (
+          <Friend
+            selectedFriend={selectedFriend}
+            setSelected={setSelected}
+            key={friend.id}
+            friend={friend}
+          />
+        );
       })}
     </ul>
   );
 };
 
-const Friend = ({ friend }: FriendsProps) => {
+const Friend = ({
+  friend,
+  selectedFriend,
+  setSelected,
+}: FriendsProps & {
+  setSelected: React.Dispatch<React.SetStateAction<FriendsType>>;
+  selectedFriend: FriendsType;
+}) => {
+  console.log(selectedFriend?.id === friend?.id);
   return (
-    <li>
+    <li className={selectedFriend?.id === friend?.id ? "selected" : ""}>
       <img src={friend.image} alt={friend.name} />
       <h3>{friend.name}</h3>
       {friend.balance < 0 && (
@@ -59,22 +87,8 @@ const Friend = ({ friend }: FriendsProps) => {
       )}
       {friend.balance === 0 && <p>You and your {friend.name} are even</p>}
 
-      <Button>Select</Button>
+      <Button onClick={() => setSelected(friend)}>Select</Button>
     </li>
-  );
-};
-
-const Button = ({
-  children,
-  handleShowAddFriend,
-}: {
-  children: ReactNode;
-  handleShowAddFriend?: () => void;
-}) => {
-  return (
-    <button onClick={handleShowAddFriend} className="button">
-      {children}
-    </button>
   );
 };
 
@@ -98,7 +112,6 @@ const FormAddFriend = ({
       balance: 0,
     };
     setFriends(newFriend);
-    console.log(newFriend);
   };
   return (
     <form className="form-add-friend" onSubmit={handleSubmit}>
@@ -121,10 +134,10 @@ const FormAddFriend = ({
   );
 };
 
-const FormSplitBill = () => {
+const FormSplitBill = ({ selectedFriend }: { selectedFriend: FriendsType }) => {
   return (
     <form className="form-split-bill">
-      <h2>Split a bill with X</h2>
+      <h2>Split a bill with {selectedFriend.name}</h2>
 
       <label>Bill Value</label>
       <input type="text" />
@@ -132,7 +145,7 @@ const FormSplitBill = () => {
       <label>Your expense</label>
       <input type="text" />
 
-      <label>X's Value</label>
+      <label>{selectedFriend.name} Value</label>
       <input type="text" />
 
       <label>Who is paying the bill</label>
@@ -141,6 +154,20 @@ const FormSplitBill = () => {
         <option value={"friend"}>X</option>
       </select>
     </form>
+  );
+};
+
+const Button = ({
+  children,
+  onClick,
+}: {
+  children: ReactNode;
+  onClick?: () => void;
+}) => {
+  return (
+    <button onClick={onClick} className="button">
+      {children}
+    </button>
   );
 };
 export default EatnSplit;

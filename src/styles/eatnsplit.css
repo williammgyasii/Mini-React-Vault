@@ -50,7 +50,7 @@
 
 .selected,
 .sidebar li:hover {
-  background-color: var(--color-lightest);
+  background-color: #e03131;
 }
 
 .sidebar li img {
