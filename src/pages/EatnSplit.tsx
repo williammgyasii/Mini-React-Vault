@@ -1,15 +1,27 @@
 import "../styles/eatnsplit.css";
-import { FriendsProps, initialFriends } from "../lib/EatnSplitFriends";
+import {
+  FriendsProps,
+  FriendsType,
+  initialFriends,
+} from "../lib/EatnSplitFriends";
 import { ReactNode, useState } from "react";
 
 const EatnSplit = () => {
   const [showForm, setShowForm] = useState(false);
+  const [friendsList, setFriendsList] = useState<FriendsType[]>(initialFriends);
   return (
     <div className="eat-split-body">
       <div className="eat-app">
         <div className="sidebar">
-          <FriendsList />
-          {showForm && <FormAddFriend />}
+          <FriendsList friendsList={friendsList} />
+          {showForm && (
+            <FormAddFriend
+              setFriends={(friend) => {
+                setFriendsList((prev) => [...prev, friend]);
+                setShowForm(false);
+              }}
+            />
+          )}
           <Button handleShowAddFriend={() => setShowForm((prev) => !prev)}>
             {showForm ? "Close ✖️" : "Add Friend 🧔"}
           </Button>
@@ -20,10 +32,10 @@ const EatnSplit = () => {
   );
 };
 
-const FriendsList = () => {
+const FriendsList = ({ friendsList }: { friendsList: FriendsType[] }) => {
   return (
     <ul>
-      {initialFriends.map((friend) => {
+      {friendsList.map((friend) => {
         return <Friend key={friend.id} friend={friend} />;
       })}
     </ul>
@@ -66,11 +78,30 @@ const Button = ({
   );
 };
 
-const FormAddFriend = () => {
+const FormAddFriend = ({
+  setFriends,
+}: {
+  setFriends: (newFriend: FriendsType) => void;
+}) => {
   const [name, setName] = useState("");
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState("https://i.pravatar.cc/48");
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const id = Date.now();
+
+    if (!name || !image) return;
+    const newFriend: FriendsType = {
+      id,
+      name: name,
+      image: `${image}?=${id}`,
+      balance: 0,
+    };
+    setFriends(newFriend);
+    console.log(newFriend);
+  };
   return (
-    <form className="form-add-friend">
+    <form className="form-add-friend" onSubmit={handleSubmit}>
       <label>Friend Name</label>
       <input
         value={name}
