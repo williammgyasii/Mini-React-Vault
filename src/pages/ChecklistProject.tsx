@@ -129,7 +129,9 @@ const PackingList = ({
           <option value={"packed"}>Sort by Packed Status</option>
         </select>
 
-        <button onClick={onClearAll}>Clear List</button>
+        {checkList.length > 0 && (
+          <button onClick={onClearAll}>Clear List</button>
+        )}
       </div>
     </div>
   );
@@ -189,7 +191,9 @@ const CheckList = () => {
   };
 
   const clearAll = () => {
-    setCheckList([]);
+    if (confirm("Are you sure you want to delete all")) {
+      setCheckList([]);
+    }
   };
 
   return (
