@@ -4,12 +4,13 @@ import {
   FriendsType,
   initialFriends,
 } from "../lib/EatnSplitFriends";
-import { ReactNode, useState } from "react";
+import { ReactNode, useMemo, useState } from "react";
 
 const EatnSplit = () => {
   const [showForm, setShowForm] = useState(false);
   const [friendsList, setFriendsList] = useState<FriendsType[]>(initialFriends);
   const [selectedFriend, setSelectedFriend] = useState<FriendsType>(null!);
+
   return (
     <div className="eat-split-body">
       <div className="eat-app">
@@ -70,9 +71,10 @@ const Friend = ({
   setSelected: React.Dispatch<React.SetStateAction<FriendsType>>;
   selectedFriend: FriendsType;
 }) => {
-  console.log(selectedFriend?.id === friend?.id);
+  const isSelected = selectedFriend?.id === friend?.id;
+
   return (
-    <li className={selectedFriend?.id === friend?.id ? "selected" : ""}>
+    <li className={isSelected ? "selected" : ""}>
       <img src={friend.image} alt={friend.name} />
       <h3>{friend.name}</h3>
       {friend.balance < 0 && (
@@ -87,7 +89,13 @@ const Friend = ({
       )}
       {friend.balance === 0 && <p>You and your {friend.name} are even</p>}
 
-      <Button onClick={() => setSelected(friend)}>Select</Button>
+      <Button
+        onClick={() =>
+          setSelected((prev) => (prev?.id === friend?.id ? null! : friend))
+        }
+      >
+        {isSelected ? "Close" : "Select"}
+      </Button>
     </li>
   );
 };
@@ -135,21 +143,42 @@ const FormAddFriend = ({
 };
 
 const FormSplitBill = ({ selectedFriend }: { selectedFriend: FriendsType }) => {
+  const [billValue, setBillValue] = useState(0);
+  const [paidByUser, setPaidByUser] = useState(0);
+  const paidByFriend = useMemo(() => billValue - paidByUser, [paidByUser,billValue]);
+  const [whoIsPaying, setWhoIsPaying] = useState("user");
   return (
     <form className="form-split-bill">
       <h2>Split a bill with {selectedFriend.name}</h2>
 
       <label>Bill Value</label>
-      <input type="text" />
+      <input
+        value={billValue}
+        onChange={(e) => setBillValue(Number(e.target.value))}
+        type="text"
+      />
 
       <label>Your expense</label>
-      <input type="text" />
+      <input
+        onChange={(e) =>
+          setPaidByUser(
+            Number(e.target.value) > billValue
+              ? paidByUser
+              : Number(e.target.value)
+          )
+        }
+        value={paidByUser}
+        type="text"
+      />
 
       <label>{selectedFriend.name} Value</label>
-      <input type="text" />
+      <input value={paidByFriend} disabled />
 
       <label>Who is paying the bill</label>
-      <select>
+      <select
+        onChange={(e) => setWhoIsPaying(e.target.value)}
+        value={whoIsPaying}
+      >
         <option value={"user"}>You</option>
         <option value={"friend"}>X</option>
       </select>
