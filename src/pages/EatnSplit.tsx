@@ -11,6 +11,18 @@ const EatnSplit = () => {
   const [friendsList, setFriendsList] = useState<FriendsType[]>(initialFriends);
   const [selectedFriend, setSelectedFriend] = useState<FriendsType>(null!);
 
+  const handleSplitBill = (friend: FriendsType) => {
+    const updatedFriendsList = friendsList.map((f) => {
+      if (f.id === friend.id) {
+        return {
+          ...f,
+          balance: f.balance + friend.balance,
+        };
+      }
+      return f;
+    });
+  };
+
   return (
     <div className="eat-split-body">
       <div className="eat-app">
@@ -32,7 +44,12 @@ const EatnSplit = () => {
             {showForm ? "Close ✖️" : "Add Friend 🧔"}
           </Button>
         </div>
-        {selectedFriend && <FormSplitBill selectedFriend={selectedFriend} />}
+        {selectedFriend && (
+          <FormSplitBill
+            onSplitBill={handleSplitBill}
+            selectedFriend={selectedFriend}
+          />
+        )}
       </div>
     </div>
   );
@@ -142,13 +159,28 @@ const FormAddFriend = ({
   );
 };
 
-const FormSplitBill = ({ selectedFriend }: { selectedFriend: FriendsType }) => {
+const FormSplitBill = ({
+  selectedFriend,
+  onSplitBill,
+}: {
+  selectedFriend: FriendsType;
+  onSplitBill: (value: FriendsType) => void;
+}) => {
   const [billValue, setBillValue] = useState(0);
   const [paidByUser, setPaidByUser] = useState(0);
-  const paidByFriend = useMemo(() => billValue - paidByUser, [paidByUser,billValue]);
+  const paidByFriend = useMemo(
+    () => billValue - paidByUser,
+    [paidByUser, billValue]
+  );
   const [whoIsPaying, setWhoIsPaying] = useState("user");
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (!billValue || !paidByUser) return;
+  }
+
   return (
-    <form className="form-split-bill">
+    <form className="form-split-bill" onSubmit={handleSubmit}>
       <h2>Split a bill with {selectedFriend.name}</h2>
 
       <label>Bill Value</label>
