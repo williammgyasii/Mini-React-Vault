@@ -214,6 +214,22 @@ const FormSplitBill = ({
         <option value={"user"}>You</option>
         <option value={"friend"}>X</option>
       </select>
+
+      <button
+        onClick={() => {
+          const friend = {
+            ...selectedFriend,
+            balance:
+              whoIsPaying === "user"
+                ? selectedFriend.balance + paidByFriend
+                : selectedFriend.balance - paidByUser,
+          };
+          onSplitBill(friend);
+        }}
+        type="submit"
+      >
+        Split Bill
+      </button>
     </form>
   );
 };
