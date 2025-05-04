@@ -6,8 +6,6 @@ import {
 } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import RootLayout from "./RootLayout";
-import PizzaOrderProject from "./pages/PizzaOrderProject";
-import CheckList from "./pages/ChecklistProject";
 import { projects } from "./lib/projects";
 
 export default function App() {
